@@ -1,0 +1,635 @@
+<%- include('../partials/header'); %>
+
+   <!-- Begin Page Content -->
+   <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800"><%= family.fname + ' ' + family.lname %></h1>
+      <div class="d-flex justify-content-end">
+        <% if(global.level == 3 && global.division == family.gnDivision){ %>
+          <a href="/edit-family?id=<%= family._id %>" class="btn btn-success btn-circle btn-sm mr-3" data-toggle="tooltip" data-placement="top" title="Edit <%= family.fname %>">
+            <i class="fas fa-pen"></i>
+          </a>
+          <a href="#" class="btn btn-danger btn-circle btn-sm mr-3"  data-toggle="modal" data-target="#deleteFamily<%= family.id %>">
+            <i class="fas fa-trash"></i>
+          </a>
+          <a href="/add-member?id=<%= family._id %>" class="btn btn-primary btn-circle btn-sm mr-3" data-toggle="tooltip" data-placement="top" title="Add Member">
+            <i class="fas fa-plus"></i>
+          </a>
+        <% } %>
+        <% if(global.level == 2 && global.division == family.gnDivision){ %>
+          <a href="/edit-family?id=<%= family._id %>" class="btn btn-success btn-circle btn-sm mr-3" data-toggle="tooltip" data-placement="top" title="Edit <%= family.fname %>">
+            <i class="fas fa-pen"></i>
+          </a>
+          <a href="/add-member?id=<%= family._id %>" class="btn btn-primary btn-circle btn-sm mr-3" data-toggle="tooltip" data-placement="top" title="Add Member">
+            <i class="fas fa-plus"></i>
+          </a>
+        <% } %>
+        <a href="/family-report?id=<%= family._id %>" class="btn btn-primary btn-circle btn-sm mr-3" data-toggle="tooltip" data-placement="top" title="Individual Report">
+          <i class="fas fa-book"></i>
+        </a>
+        <a href="/full-report?id=<%= family._id %>" class="btn btn-primary btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Full Report">
+          <i class="fas fa-bookmark"></i>
+        </a>
+      </div>      
+    </div>
+
+    <div class="row">
+
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Monthly)</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800"><%= family.monthlyIncome %></div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earnings (Annual) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">Rs.3000K</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tasks Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+                <div class="row no-gutters align-items-center">
+                  <div class="col-auto">
+                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                  </div>
+                  <div class="col">
+                    <div class="progress progress-sm mr-2">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pending Requests Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-comments fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-6">
+
+        <!-- Default Card Example -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h6 class="m-0 font-weight-bold text-primary">Personal Details</h6>
+          </div>
+          <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    First Name
+                </div>
+                <div class="col-lg-6">
+                    <%= family.fname %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Last Name
+                </div>
+                <div class="col-lg-6">
+                    <%= family.lname %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Date of Birth
+                </div>
+                <div class="col-lg-6">
+                    <%= family.dob %>
+                </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-lg-6">
+                  Gender
+              </div>
+              <div class="col-lg-6">
+                <% if(family.gender == 1){ %>
+                  Male
+              <% }else if(family.gender == 2){ %>
+                  Female
+              <% } %>
+              </div>
+          </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    NIC Number
+                </div>
+                <div class="col-lg-6">
+                    <%= family.nic %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Religion
+                </div>
+                <div class="col-lg-6">
+                    <% if(family.religion == 1){ %>
+                        Hinduism
+                    <% }else if(family.religion == 2){ %>
+                        Christianity
+                    <% }else if(family.religion == 3){ %>
+                        Buddhism
+                    <% }else if(family.religion == 4){ %>
+                        Islam
+                    <% } %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Ethnic
+                </div>
+                <div class="col-lg-6">
+                    <% if(family.ethnic == 1){ %>
+                        Tamils
+                    <% }else if(family.ethnic == 2){ %>
+                        Sinhalese
+                    <% }else if(family.ethnic == 3){ %>
+                        Indian Tamils
+                    <% }else if(family.ethnic == 4){ %>
+                        Muslims
+                    <% } %>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Basic Card Example -->
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Job Details</h6>
+          </div>
+          <div class="card-body">
+            <% if(family.jobState == 1){ %>
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        Job
+                    </div>
+                    <div class="col-lg-6">
+                        <%= family.job %>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        Monthly Income
+                    </div>
+                    <div class="col-lg-6">
+                        <%= family.monthlyIncome %>
+                    </div>
+                </div>
+              <% } else { %>
+                <div class="row mb-3">
+                  <div class="col-lg-6">
+                      Job
+                  </div>
+                  <div class="col-lg-6">
+                      No
+                  </div>
+              </div>
+              <div class="row mb-3">
+                  <div class="col-lg-6">
+                      Monthly Income
+                  </div>
+                  <div class="col-lg-6">
+                      No
+                  </div>
+              </div>
+            <% } %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-lg-6">
+
+        <!-- Dropdown Card Example -->
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Living Details</h6>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Temporary Address
+                </div>
+                <div class="col-lg-6">
+                    <%= family.temporaryAddress %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Permanent Address
+                </div>
+                <div class="col-lg-6">
+                    <%= family.permanentAddress %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    GN Division
+                </div>
+                <div class="col-lg-6">
+                    <% if(family.gnDivision == 1){ %>
+                        Barathinagar
+                    <% }else if(family.gnDivision == 2){ %>
+                        Pugalenthinagar
+                    <% } %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    DS Division
+                </div>
+                <div class="col-lg-6">
+                    <%= family.dsDivision %>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collapsable Card Example -->
+        <div class="card shadow mb-4">
+          <!-- Card Header - Accordion -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Contact Details</h6>
+          </div>
+          <!-- Card Content - Collapse -->
+          <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Email
+                </div>
+                <div class="col-lg-6">
+                    <%= family.email %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Mobile
+                </div>
+                <div class="col-lg-6">
+                    <%= family.mobile %>
+                </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!--Family End-->
+
+    <h1 class="text-center border-bottom pb-2 mt-3">Members</h1>
+
+
+    <% members.forEach(function(member) { %>
+
+    <!--Member Start-->
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-3" id="<%= member.id %>">
+      <h1 class="h3 mb-0 text-primary">
+          <% if(member.relation == 1){ %>
+              Wife :
+          <% } else if(member.relation == 2) { %>
+              Daughter :
+          <% } else if(member.relation == 3) { %>
+              Son :
+          <% } %>
+        <%= member.fname + ' ' + member.lname %>
+      </h1>
+      <div class="d-flex justify-content-end">
+        <% if(global.level == 3 && global.division == family.gnDivision){ %>
+          <a href="/edit-member?id=<%= member._id %>" class="btn btn-success btn-circle btn-sm mr-3" data-toggle="tooltip" data-placement="top" title="Edit <%= member.fname %>">
+            <i class="fas fa-pen"></i>
+          </a>
+          <a href="#" class="btn btn-danger btn-circle btn-sm mr-3"  data-toggle="modal" data-target="#deleteMember<%= member.id %>">
+            <i class="fas fa-trash"></i>
+          </a>
+        <% } %>
+        <% if(global.level == 2 && global.division == family.gnDivision){ %>
+          <a href="/edit-member?id=<%= member._id %>" class="btn btn-success btn-circle btn-sm mr-3" data-toggle="tooltip" data-placement="top" title="Edit <%= member.fname %>">
+            <i class="fas fa-pen"></i>
+          </a>
+        <% } %>
+        <a href="/individual-report?id=<%= member._id %>" class="btn btn-primary btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Individual Report">
+          <i class="fas fa-book"></i>
+        </a>
+      </div>      
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-6">
+
+        <!-- Default Card Example -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h6 class="m-0 font-weight-bold text-primary">Personal Details</h6>
+          </div>
+          <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    First Name
+                </div>
+                <div class="col-lg-6">
+                    <%= member.fname %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Last Name
+                </div>
+                <div class="col-lg-6">
+                    <%= member.lname %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Date of Birth
+                </div>
+                <div class="col-lg-6">
+                    <%= member.dob %>
+                </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-lg-6">
+                  Gender
+              </div>
+              <div class="col-lg-6">
+                <% if(member.gender == 1){ %>
+                  Male
+              <% }else if(member.gender == 2){ %>
+                  Female
+              <% } %>
+              </div>
+          </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    NIC Number
+                </div>
+                <div class="col-lg-6">
+                    <%= member.nic %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Religion
+                </div>
+                <div class="col-lg-6">
+                    <% if(member.religion == 1){ %>
+                        Hinduism
+                    <% }else if(member.religion == 2){ %>
+                        Christianity
+                    <% }else if(member.religion == 3){ %>
+                        Buddhism
+                    <% }else if(member.religion == 4){ %>
+                        Islam
+                    <% } %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Ethnic
+                </div>
+                <div class="col-lg-6">
+                    <% if(member.ethnic == 1){ %>
+                        Tamils
+                    <% }else if(member.religion == 2){ %>
+                        Sinhalese
+                    <% }else if(member.religion == 3){ %>
+                        Indian Tamils
+                    <% }else if(member.religion == 4){ %>
+                        Muslims
+                    <% } %>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Basic Card Example -->
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Job Details</h6>
+          </div>
+          <div class="card-body">
+            <% if(member.jobState == 1){ %>
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        Job
+                    </div>
+                    <div class="col-lg-6">
+                        <%= member.job %>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        Monthly Income
+                    </div>
+                    <div class="col-lg-6">
+                        <%= member.monthlyIncome %>
+                    </div>
+                </div>
+              <% } else { %>
+                <div class="row mb-3">
+                  <div class="col-lg-6">
+                      Job
+                  </div>
+                  <div class="col-lg-6">
+                      No
+                  </div>
+              </div>
+              <div class="row mb-3">
+                  <div class="col-lg-6">
+                      Monthly Income
+                  </div>
+                  <div class="col-lg-6">
+                      No
+                  </div>
+              </div>
+            <% } %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-lg-6">
+
+        <!-- Dropdown Card Example -->
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Living Details</h6>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Temporary Address
+                </div>
+                <div class="col-lg-6">
+                    <%= member.temporaryAddress %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Permanent Address
+                </div>
+                <div class="col-lg-6">
+                    <%= member.permanentAddress %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    GN Division
+                </div>
+                <div class="col-lg-6">
+                    <% if(family.gnDivision == 1){ %>
+                        Barathinagar
+                    <% }else if(family.gnDivision == 2){ %>
+                        Pugalenthinagar
+                    <% } %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    DS Division
+                </div>
+                <div class="col-lg-6">
+                    <%= family.dsDivision %>
+
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collapsable Card Example -->
+        <div class="card shadow mb-4">
+          <!-- Card Header - Accordion -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Contact Details</h6>
+          </div>
+          <!-- Card Content - Collapse -->
+          <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Email
+                </div>
+                <div class="col-lg-6">
+                    <%= member.email %>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    Mobile
+                </div>
+                <div class="col-lg-6">
+                    <%= member.mobile %>
+                </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- Delete Family Modal-->
+    <div class="modal fade" id="deleteMember<%= member.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Are you sure to Delete?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Delete" below if you are ready to delete <%= member.fname %>.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="/delete-member?id=<%= member._id %>&fid=<%= member.familyID %>">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Member-->
+    <% }); %>
+  </div>
+  <!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+  <!-- Delete Family Modal-->
+  <div class="modal fade" id="deleteFamily<%= family.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Are you sure to Delete?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Delete" below if you are ready to delete <%= family.fname %>'s family'.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="/delete-family?id=<%= family._id %>">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+ 
+
+<%- include('../partials/footer'); %>

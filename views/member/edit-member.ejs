@@ -1,0 +1,217 @@
+<%- include('../partials/header'); %>
+
+
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-1 text-gray-800">Edit Member</h1>
+        <p class="mb-4">Edit this Member of <%= family.fname %>'s Family. It will automatically add this family under your GN Division.</p>
+        <form action="/edit-member?id=<%= member._id %>&fid=<%= member.familyID %>" method="POST" class="validation user">
+            <!-- Content Row -->
+            <div class="row">
+
+            <!-- First Column -->
+            <div class="col-lg-4">
+
+                <!-- Custom Text Color Utilities -->
+                <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Personal Details</h6>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <select name="member[relation]" class="form-control custom-select" required data-rule="required" data-msg="Please select one">
+                            <option value="" disabled selected>Choose Relationship</option>
+                            <% 
+                            var i=j=k="";
+                            if(member.relation == 1){ 
+                                i = 'selected';
+                            }else if(member.relation == 2){ 
+                                j = 'selected';
+                            }else if(member.relation == 3){ 
+                                k = 'selected';
+                            } %>
+                            <option value="1" <%= i %> >Wife</option>
+                            <option value="2" <%= j %> >Daughter</option>
+                            <option value="3" <%= k %> >Son</option>
+                        </select>
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" autocomplete="off" name="member[fname]" value="<%= member.fname %>" placeholder="Enter First Name" data-rule="minlen:1" data-msg="Please enter at least 1 chars">
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" autocomplete="off" name="member[lname]" value="<%= member.lname %>" placeholder="Enter Last Name" data-rule="minlen:1" data-msg="Please enter at least 1 chars">
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" class="form-control" autocomplete="off" name="member[dob]" value="<%= member.dob %>" id="datepicker" placeholder="Enter Date of Birth" data-rule="required" data-msg="Please enter date of birth">
+                        <div class="validate"></div>                        
+                    </div>
+                    <div class="form-group">
+                        <select name="member[gender]" class="form-control custom-select"  required>
+                            <option value="" disabled selected>Choose Gender</option>
+                            <% 
+                            var l=m="";
+                            if(member.gender == 1){ 
+                                l = 'selected';
+                            }else if(member.gender == 2){ 
+                                m = 'selected';
+                            } %>
+                            <option value="1" <%= l %>>Male</option>
+                            <option value="2" <%= m %>>Female</option>
+                        </select>
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" pattern="([0-9]{9})([a-z]{1})" title="Must contains 9 digits first then one chars as last letter. eg: 123456789v" autocomplete="off" name="member[nic]" value="<%= member.nic %>" placeholder="Enter NIC Number">
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <select name="member[religion]" class="form-control custom-select" required>
+                            <option value="" disabled selected>Choose Religion</option>
+                            <% 
+                            var a=b=c=d="";
+                            if(member.religion == 1){ 
+                                a = 'selected';
+                            }else if(member.religion == 2){ 
+                                b = 'selected';
+                            }else if(member.religion == 3){ 
+                                c = 'selected';
+                            }else if(member.religion == 4){ 
+                                d = 'selected';
+                            } %>
+                            <option value="1" <%= a %> >Hinduism</option>
+                            <option value="2" <%= b %> >Christianity</option>
+                            <option value="3" <%= c %> >Buddhism</option>
+                            <option value="4" <%= d %> >Islam</option>
+                        </select>
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <select name="member[ethnic]" class="form-control custom-select" required>
+                            <option value="" disabled selected>Choose Ethnic</option>
+                            <% 
+                            var e=f=g=h="";
+                            if(member.ethnic == 1){ 
+                                e = 'selected';
+                            }else if(member.ethnic == 2){ 
+                                f = 'selected';
+                            }else if(member.ethnic == 3){ 
+                                g = 'selected';
+                            }else if(member.ethnic == 4){ 
+                                h = 'selected';
+                            } %>
+                            <option value="1" <%= e %> >Tamils</option>
+                            <option value="2" <%= f %> >Sinhalese</option>
+                            <option value="3" <%= g %> >Indian Tamils</option>
+                            <option value="4" <%= h %> >Muslims</option>
+                        </select>
+                        <div class="validate"></div>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+
+            <!-- Second Column -->
+            <div class="col-lg-4">
+
+                <!-- Background Gradient Utilities -->
+                <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Job & Living Details</h6>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <select name="member[jobState]" onChange="check();" class="form-control custom-select" required id="jobState">
+                            <option value="" disabled selected>Choose Job State</option>
+                            <% 
+                            var l=m="";
+                            if(member.jobState == 1){ 
+                                l = 'selected';
+                            }else if(member.jobState == 2){ 
+                                m = 'selected';                   
+                            } %>
+                            <option value="1" <%= l %> >Yes</option>
+                            <option value="2" <%= m %> >No</option>
+                        </select>
+                        <div class="validate"></div>
+                        <script>
+                            function check(){
+                                if($("#jobState").val() == 2){
+                                    $("#job").attr("disabled", true);
+                                    $("#monthlyIncome").attr("disabled", true);
+                                }
+                                else{
+                                    $("#job").attr("disabled", false);
+                                    $("#monthlyIncome").attr("disabled", false);
+                                }
+                            }
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="job" class="form-control" autocomplete="off" value="<%= member.job %>" name="member[job]" placeholder="Enter your Job">
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="monthlyIncome" class="form-control" autocomplete="off" value="<%= member.monthlyIncome %>" name="member[monthlyIncome]" placeholder="Enter Monthly Income">
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <textarea type="text"  class="form-control" autocomplete="off" name="member[temporaryAddress]" placeholder="Enter Temporary Address"><%= member.temporaryAddress %></textarea>
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <textarea type="text"  class="form-control" autocomplete="off" name="member[permanentAddress]" placeholder="Enter Permanent Address"><%= member.permanentAddress %></textarea>
+                        <div class="validate"></div>
+                    </div>                   
+                </div>
+                </div>
+
+            </div>
+
+            <!-- Third Column -->
+            <div class="col-lg-4">
+
+                <!-- Grayscale Utilities -->
+                <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Contact Details</h6>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <input type="email" class="form-control" autocomplete="off" name="member[email]" placeholder="Enter Email" value="<%= member.email %>">
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" autocomplete="off" name="member[mobile]" placeholder="Enter Mobile Number" value="<%= member.mobile %>" pattern="([0-9]{10})" title="Must contains 10 digits only. eg : 0777123456">
+                        <div class="validate"></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            </div>
+            <div class="mb-3">
+                <div id="check"></div>
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Changed Successfully!</div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a type="button" href="/show-family?id=<%= member.familyID %>" class="btn btn-danger btn-user mr-3"> Go Back </a>
+                <button type="submit" class="btn btn-primary btn-user"> Save Changes</button>  
+            </div>
+                
+        </form>
+      </div>
+      <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+
+<%- include('../partials/footer'); %>

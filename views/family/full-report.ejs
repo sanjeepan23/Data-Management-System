@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+            .container{
+                width: 80%;
+                margin: auto;
+            }
+            .title{
+                text-align: center;
+                margin: 0;
+                padding-bottom: 10px;
+            }
+            .heading{
+                margin: 0;
+                padding: 0px;
+                padding-bottom: 10px;
+            }
+      
+            .column {
+                float: left;
+                width: 50%;
+                height: auto; 
+                padding-bottom: 5px;
+                font-size: 12px;
+            }
+            .row:after {
+                margin-top: 0;
+                padding-top: 0px;
+                content: "";
+                display: table;
+                clear: both;                
+            }
+            .padder{
+                padding-top: 10px;
+            }
+            .sub-padder{
+                padding-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="container">
+            <h4 class="title">Family Report - <%= family.fname %></h4>
+            <hr>
+            <h5 class="heading">Personal Details</h5>
+            <div class="row">
+                <div class="column">
+                    First Name
+                </div>
+                <div class="column">
+                    <%= family.fname %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    Last Name
+                </div>
+                <div class="column">
+                    <%= family.lname %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    Date of Birth
+                </div>
+                <div class="column">
+                    <%= family.dob %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    NIC No
+                </div>
+                <div class="column">
+                    <%= family.nic %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    Religion
+                </div>
+                <div class="column">
+                    <% if(family.religion == 1){ %>
+                        Hinduism
+                    <% }else if(family.religion == 2){ %>
+                        Christianity
+                    <% }else if(family.religion == 3){ %>
+                        Buddhism
+                    <% }else if(family.religion == 4){ %>
+                        Islam
+                    <% } %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    Ethnic
+                </div>
+                <div class="column">
+                    <% if(family.ethnic == 1){ %>
+                        Tamils
+                    <% }else if(family.ethnic == 2){ %>
+                        Sinhalese
+                    <% }else if(family.ethnic == 3){ %>
+                        Indian Tamils
+                    <% }else if(family.ethnic == 4){ %>
+                        Muslims
+                    <% } %>
+                </div>
+            </div>
+            <h5 class="heading padder">Living Details</h5>
+            <div class="row">
+                <div class="column">
+                    Temporary Address
+                </div>
+                <div class="column">
+                    <%= family.temporaryAddress %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    Permanent Address
+                </div>
+                <div class="column">
+                    <%= family.permanentAddress %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    GN Division
+                </div>
+                <div class="column">
+                    <% if(family.gnDivision == 1){ %>
+                        Barathinagar
+                    <% }else if(family.gnDivision == 2){ %>
+                        Pugalenthinagar
+                    <% } %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    DS Division
+                </div>
+                <div class="column">
+                    <%= family.dsDivision %>
+                </div>
+            </div>
+            <h5 class="heading padder">Job Details</h5>
+            <div class="row">
+                <div class="column">
+                    Job
+                </div>
+                <div class="column">
+                    <%= family.job %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    Monthly Income
+                </div>
+                <div class="column">
+                    <%= family.monthlyIncome %>
+                </div>
+            </div>
+            <h5 class="heading padder">Contact Details</h5>
+            <div class="row">
+                <div class="column">
+                    Email
+                </div>
+                <div class="column">
+                    <%= family.email %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    Mobile
+                </div>
+                <div class="column">
+                    <%= family.mobile %>
+                </div>
+            </div>
+            
+            <% members.forEach(function(member) { %>
+                <h4 class="title sub-padder">Member - <%= member.fname +' '+ member.lname %></h4>
+                <hr>
+                <h5 class="heading">Personal Details</h5>
+                <div class="row">
+                    <div class="column">
+                        Relation
+                    </div>
+                    <div class="column">
+                        <% if(member.relation == 1){ %>
+                            Wife
+                        <% } else if(member.relation == 2) { %>
+                            Daughter
+                        <% } else if(member.relation == 3) { %>
+                            Son
+                        <% } %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        First Name
+                    </div>
+                    <div class="column">
+                        <%= member.fname %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        Last Name
+                    </div>
+                    <div class="column">
+                        <%= member.lname %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        Date of Birth
+                    </div>
+                    <div class="column">
+                        <%= member.dob %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        NIC No
+                    </div>
+                    <div class="column">
+                        <%= member.nic %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        Religion
+                    </div>
+                    <div class="column">
+                        <% if(member.religion == 1){ %>
+                            Hinduism
+                        <% }else if(member.religion == 2){ %>
+                            Christianity
+                        <% }else if(member.religion == 3){ %>
+                            Buddhism
+                        <% }else if(member.religion == 4){ %>
+                            Islam
+                        <% } %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        Ethnic
+                    </div>
+                    <div class="column">
+                        <% if(member.ethnic == 1){ %>
+                            Tamils
+                        <% }else if(member.ethnic == 2){ %>
+                            Sinhalese
+                        <% }else if(member.ethnic == 3){ %>
+                            Indian Tamils
+                        <% }else if(member.ethnic == 4){ %>
+                            Muslims
+                        <% } %>
+                    </div>
+                </div>
+                <h5 class="heading padder">Living Details</h5>
+                <div class="row">
+                    <div class="column">
+                        Temporary Address
+                    </div>
+                    <div class="column">
+                        <%= family.temporaryAddress %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        Permanent Address
+                    </div>
+                    <div class="column">
+                        <%= family.permanentAddress %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        GN Division
+                    </div>
+                    <div class="column">
+                        <% if(family.gnDivision == 1){ %>
+                            Barathinagar
+                        <% }else if(family.gnDivision == 2){ %>
+                            Pugalenthinagar
+                        <% } %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        DS Division
+                    </div>
+                    <div class="column">
+                        <%= family.dsDivision %>
+                    </div>
+                </div>
+                <h5 class="heading padder">Job Details</h5>
+                <div class="row">
+                    <div class="column">
+                        Job
+                    </div>
+                    <div class="column">
+                        <%= member.job %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        Monthly Income
+                    </div>
+                    <div class="column">
+                        <%= member.monthlyIncome %>
+                    </div>
+                </div>
+                <h5 class="heading padder">Contact Details</h5>
+                <div class="row">
+                    <div class="column">
+                        Email
+                    </div>
+                    <div class="column">
+                        <%= member.email %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        Mobile
+                    </div>
+                    <div class="column">
+                        <%= member.mobile %>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+
+
+    </body>
+</html>

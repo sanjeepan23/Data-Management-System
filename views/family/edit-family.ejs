@@ -1,0 +1,223 @@
+<%- include('../partials/header'); %>
+
+
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-1 text-gray-800">Edit Family</h1>
+        <p class="mb-4">Edit this family. It will automatically add this family under your GN Division.</p>
+        <form action="/edit-family?id=<%= family._id %>" method="POST" class="validation user">
+            <!-- Content Row -->
+            <div class="row">
+
+            <!-- First Column -->
+            <div class="col-lg-4">
+
+                <!-- Custom Text Color Utilities -->
+                <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Personal Details</h6>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" autocomplete="off" name="family[fname]" value="<%= family.fname %>" placeholder="Enter Family First Name" data-rule="minlen:1" data-msg="Please enter at least 1 chars">
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" autocomplete="off" name="family[lname]" value="<%= family.lname %>" placeholder="Enter Family Last Name" data-rule="minlen:1" data-msg="Please enter at least 1 chars">
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" class="form-control" autocomplete="off" name="family[dob]" value="<%= family.dob %>" id="datepicker" placeholder="Enter Date of Birth" data-rule="required" data-msg="Please enter date of birth">
+                        <div class="validate"></div>                 
+                    </div>
+                    <div class="form-group">
+                        <select name="family[gender]" class="form-control custom-select"  required>
+                            <option value="" disabled selected>Choose Gender</option>
+                            <% 
+                            var i=j="";
+                            if(family.gender == 1){ 
+                                i = 'selected';
+                            }else if(family.gender == 2){ 
+                                j = 'selected';
+                            } %>
+                            <option value="1" <%= i %>>Male</option>
+                            <option value="2" <%= j %>>Female</option>
+                        </select>
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" pattern="([0-9]{9})([a-z]{1})" title="Must contains 9 digits first then one chars as last letter. eg: 123456789v" autocomplete="off" name="family[nic]" value="<%= family.nic %>" placeholder="Enter NIC Number">
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <select name="family[religion]" class="form-control custom-select" required>
+                            <option value="" disabled selected>Choose Religion</option>
+                            <% 
+                            var a=b=c=d="";
+                            if(family.religion == 1){ 
+                                a = 'selected';
+                            }else if(family.religion == 2){ 
+                                b = 'selected';
+                            }else if(family.religion == 3){ 
+                                c = 'selected';
+                            }else if(family.religion == 4){ 
+                                d = 'selected';
+                            } %>
+                            <option value="1" <%= a %> >Hinduism</option>
+                            <option value="2" <%= b %> >Christianity</option>
+                            <option value="3" <%= c %> >Buddhism</option>
+                            <option value="4" <%= d %> >Islam</option>
+                        </select>
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <select name="family[ethnic]" class="form-control custom-select" required>
+                            <option value="" disabled selected>Choose Ethnic</option>
+                            <% 
+                            var e=f=g=h="";
+                            if(family.ethnic == 1){ 
+                                e = 'selected';
+                            }else if(family.ethnic == 2){ 
+                                f = 'selected';
+                            }else if(family.ethnic == 3){ 
+                                g = 'selected';
+                            }else if(family.ethnic == 3){ 
+                                h = 'selected';
+                            } %>
+                            <option value="1" <%= e %> >Tamils</option>
+                            <option value="2" <%= f %> >Sinhalese</option>
+                            <option value="3" <%= g %> >Indian Tamils</option>
+                            <option value="4" <%= h %> >Muslims</option>
+                        </select>
+                        <div class="validate"></div>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+
+            <!-- Second Column -->
+            <div class="col-lg-4">
+
+                <!-- Background Gradient Utilities -->
+                <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Job & Living Details</h6>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <select name="family[jobState]" onChange="check();" class="form-control custom-select" required id="jobState">
+                            <option value="" disabled selected>Choose Job State</option>
+                            <% 
+                            var k=l="";
+                            if(family.jobState == 1){ 
+                                k = 'selected';
+                            }else if(family.jobState == 2){ 
+                                l = 'selected';                   
+                            } %>
+                            <option value="1" <%= k %> >Yes</option>
+                            <option value="2" <%= l %> >No</option>
+                        </select>
+                        <div class="validate"></div>
+                        <script>
+                            function check(){
+                                if($("#jobState").val() == 2){
+                                    $("#job").attr("disabled", true);
+                                    $("#monthlyIncome").attr("disabled", true);
+                                }
+                                else{
+                                    $("#job").attr("disabled", false);
+                                    $("#monthlyIncome").attr("disabled", false);
+                                }
+                            }
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="job" class="form-control" value="<%= family.job %>" autocomplete="off" name="family[job]" placeholder="Enter your Job">
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="monthlyIncome" class="form-control" value="<%= family.monthlyIncome %>" autocomplete="off" name="family[monthlyIncome]" placeholder="Enter Monthly Income">
+                        <div class="validate"></div>
+                    </div>                
+                    <div class="form-group">
+                        <textarea type="text"  class="form-control" name="family[temporaryAddress]" autocomplete="off" placeholder="Enter Temporary Address"><%= family.temporaryAddress %></textarea>
+                        <div class="validate"></div>
+                    </div>
+                    <div class="form-group">
+                        <textarea type="text"  class="form-control" name="family[permanentAddress]" autocomplete="off" placeholder="Enter Permanent Address"><%= family.permanentAddress %></textarea>
+                        <div class="validate"></div>
+                    </div>                   
+                </div>
+                </div>
+
+            </div>
+
+            <!-- Third Column -->
+            <div class="col-lg-4">
+
+                <!-- Grayscale Utilities -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Contact Details</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="family[email]" autocomplete="off" placeholder="Enter Email" value="<%= family.email %>">
+                            <div class="validate"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="family[mobile]" autocomplete="off" placeholder="Enter Mobile Number" value="<%= family.mobile %>" pattern="([0-9]{10})" title="Must contains 10 digits only. eg : 0777123456">
+                            <div class="validate"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Grayscale Utilities -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Move Family</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <select name="family[gnDivision]" class="form-control custom-select" required>
+                                <option value="" disabled selected>Choose Gn Division</option>
+                                <% 
+                                var m=n="";
+                                if(family.gnDivision == 1){ 
+                                    m = 'selected';
+                                }else if(family.gnDivision == 2){ 
+                                    n = 'selected';
+                                } %>
+                                <option value="1" <%= m %> >Barathinagar</option>
+                                <option value="2" <%= n %> >Pugalenthinagar</option>
+                            </select>
+                            <div class="validate"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            </div>
+            <div class="mb-3">
+                <div id="check"></div>
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Changed Successfully!</div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a type="button" class="btn btn-danger btn-user mr-3" href="/show-family?id=<%= family._id %>">Back</a>
+                <button type="submit" class="btn btn-primary btn-user"> Save Changes</button>  
+            </div>
+                
+        </form>
+      </div>
+      <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+
+<%- include('../partials/footer'); %>
